@@ -1,0 +1,19 @@
+{
+  "name": "lobserver",
+  "version": "1.0.0",
+  "description": "Used for API Calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smistry1121/Lob-API-Demo.git"
+  },
+  "author": "Sagar Mistry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smistry1121/Lob-API-Demo/issues"
+  },
+  "homepage": "https://github.com/smistry1121/Lob-API-Demo#readme"
+}
