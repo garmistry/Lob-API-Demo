@@ -8,7 +8,7 @@ Notes:
 --- Please swap out API Keys for LOB in 'index.js'.
 
 
-Thanks for checking out this demo of the LOB API. 
+Thanks for checking out this demo of the Lob API. 
 
 To start. 
 
