@@ -4,7 +4,8 @@
   "description": "Used for API Calls",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nf start -p 3000"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/smistry1121/Lob-API-Demo/issues"
   },
-  "homepage": "https://github.com/smistry1121/Lob-API-Demo#readme"
+  "homepage": "https://github.com/smistry1121/Lob-API-Demo#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "foreman": "^2.0.0",
+    "googleapis": "^13.0.0",
+    "lob": "^3.9.0"
+  }
 }
