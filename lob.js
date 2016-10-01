@@ -1,55 +1,35 @@
-	var express = require('express')
-	var bodyParser = require('body-parser')
-	var app = express(); 
-var Lob = require('lob')('test_de4399ac16561129ab00c7e19ed09ed21e9', {// Replace test_de4399ac16561129ab00c7e19ed09ed21e9 with your own LOB API Key 
+// To run: 
+
+// Node lob.js 'USE LOB API KEY HERE'
+
+
+
+const Lob = require('lob')(process.argv[2], {// Replace test_de4399ac16561129ab00c7e19ed09ed21e9 with your own LOB API Key 
   apiVersion: '2016-06-30'
 }); 
+const google = require('googleapis');
+const civicSearch = google.civicinfo('v2');
+var prompt = require('prompt');
 
-app.use(express.static('../public'));
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-var google = require('googleapis');
-var civicSearch = google.civicinfo('v2');
-
-var portNumber = 8000;
-app.listen(portNumber);
-
-
-console.log("Server listening at " + portNumber)
-
-
-app.get('/', function(req, res){
-	res.json('Hello World');
-});
-
-
-
-app.post('/sendletter', function(req,res){
-
+console.log(process.argv[2]);
+prompt.start();
+prompt.get(['name','address1','address2','city','state','zipcode','message'],function (err,results){
+	if(err) throw err;
 	var senderInfo = {
-		name : req.body.name, 
-		address1 :  req.body.address1, 
-		address2 :  req.body.address2, 
-		city :  req.body.city, 
-		state :  req.body.state,
-		zipcode :  req.body.zipcode, 
-		message :  req.body.message, 
+		name : results.name, 
+		address1 :  results.address1, 
+		address2 :  results.address2, 
+		city :  results.city, 
+		state :  results.state,
+		zipcode :  results.zipcode, 
+		message :  results.message, 
 	};
-	console.log(senderInfo);
-	var senderAddress =  req.body.address1 + " " + req.body.city + " "+ req.body.state + " "+ req.body.zipcode;
+	var senderAddress =  results.address1 + " " + results.city + " "+ results.state + " "+ results.zipcode;
 	var apikey = 'AIzaSyCoYFqJ5b-LB8ra1AZf2kab2y0AdZs2UFc';
 
 	civicSearch.representatives.representativeInfoByAddress({ key: apikey, address: senderAddress}, function(err, response) {
 		if(err){
 			console.log(err);
-			res.json(err);
 		}
 		else{
 			var representative = {
@@ -85,14 +65,14 @@ app.post('/sendletter', function(req,res){
 					  },
 					color: true
 					}, function (err, res){
-					  		
+					  console.log('Letter submitted successfully.');		
 					});
-			res.status(200).json({isValue: 'true'});;
 		}
 	});
-
-
-
-		
-
 });
+	
+	
+	
+
+
+
